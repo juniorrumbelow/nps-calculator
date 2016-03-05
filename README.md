@@ -1,2 +1,2 @@
 # nps-calculator
-# angular js app for working out your nps
+# <p>angular js app for working out your nps</p>
