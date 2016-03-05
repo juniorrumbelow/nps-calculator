@@ -1,0 +1,162 @@
+html, body {
+    height: 100%;
+}
+
+input {
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #A7A7A7;
+}
+
+.break {
+    margin-top: 1em;
+}
+
+.input-group {
+    margin: .8em 0;
+}
+
+.types input {
+    text-align: right;
+}
+
+.types {
+    margin-top: 3em;
+}
+
+.input-group-addon {
+    border-color: #A7A7A7;
+}
+
+.types .input-group-addon:hover {
+    cursor: help;
+}
+
+.types .input-group-addon p {
+    border-bottom: 1px dotted #999;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.red {
+    background: #FFA3A3;
+    color: black;
+    font-weight: 500;
+}
+
+.orange {
+    background: #FFDC9B;
+    color: black;
+    font-weight: 500;
+}
+
+.green {
+    background: #BBF9AC;
+    color: black;
+    font-weight: 500;
+}
+
+.page-wrap {
+    min-height: 100%;
+}
+
+footer p {
+    text-align: center;
+}
+
+.navbar-default {
+    background: #4a3d7a;
+    border: none;
+    border-radius: 0;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .fa {
+    margin-right: .5em;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background: #302654;
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+}
+
+.input-rounded {
+    border-radius: 0 4px 4px 0;
+}
+
+.nps-input {
+    border: none;
+    font-size: 3.4em;
+    padding: 0;
+    text-align: center;
+}
+
+.nps-addon {
+    border: none;
+    background: white;
+    font-size: 1.2em;
+}
+
+.nps-wrap {
+    margin-top: 4.4em;
+    text-align: center;
+}
+
+.nps-symbol {
+    font-size: .6em;
+    position: relative;
+    top: -6px;
+}
+
+h4 {
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+
+.one-ten .input-group {
+    float: left;
+    margin: .4em;
+    width: 9%;
+}
+
+.one-ten .input-group-addon {
+    display: block;
+    width: 100%;
+    border: 1px solid #A7A7A7;
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+    font-size: 1.2em;
+}
+
+
+
+
+
+.one-ten .input-rounded {
+    border-radius: 0 0 4px 4px;
+}
+
+@media only screen and (max-width: 768px) {
+    .one-ten .input-group {
+        width: 100%;
+    }
+}
+
+
+
