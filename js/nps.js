@@ -17,6 +17,7 @@ app.controller('npsController', function ($scope) {
         var ten = Number($scope.ten || 0);
     
     
+    
         // Working out the totals
     
         $scope.totalRespondents = function() {
@@ -33,8 +34,8 @@ app.controller('npsController', function ($scope) {
 
         $scope.totalPromoters = function() {
             $scope.sum = nine+ten;
-        }
-        
+        }    
+  
         
         // Working out the percentage values
         
@@ -69,7 +70,7 @@ app.controller('npsController', function ($scope) {
             $scope.one = null;
         }
     
-       if($scope.seven !== undefined) {  
+        if($scope.seven !== undefined) {  
             $scope.seven = '';
         }
         else {
@@ -83,6 +84,6 @@ app.controller('npsController', function ($scope) {
             $scope.ten = null;
         }
     
+    
 });
-
 
