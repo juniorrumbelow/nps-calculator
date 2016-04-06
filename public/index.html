@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What's my NPS? | NPS Calculator</title>
+    <link rel="shortcut icon" href="favicon.png"/> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/custom.css"/>
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src='https://code.jquery.com/jquery-latest.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+    <script src="js/nps.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
+    
+  </head>
+    
+  <body ng-app="npsApp">
+      
+      <header>
+          <nav class="navbar navbar-default">
+              <div class="container">
+
+                  <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">What's my NPS?</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"><i class='fa fa-calculator'></i>Calculator <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#"><i class='fa fa-bar-chart'></i>My Scores</a></li>
+                  </ul>
+                  <div ng-controller="facebookLogin">
+                      <div ng-show="authData"><a href="/"><button class="fb-logout-btn" ng-click="auth.$unauth()">Logout</button></a><p class="hello">Hey, {{ authData.facebook.cachedUserProfile.first_name }}</p></div>
+                      <div ng-hide="authData"><button id="fblogin" class="fb-login-btn" ng-click="auth.$authWithOAuthPopup('facebook')"><i class="fa fa-facebook-official"></i><span>Login With Facebook</span></button></div>
+                   </div>
+                </div>
+              </div>
+        </nav>
+    </header>
+                  
+                <div ng-controller="npsController" ng-init="init(npss.value)">
+                    
+                    
+                    
+                     <div class="page-wrap">
+      
+                        <div class="container">
+                    
+                    
+                        <div class="row">
+                    
+                        <div class="col-lg-12">
+                            <h2>How likely is it you would recommend our company to a friend or colleague?</h2>
+                        </div>
+                    
+                        <div class="col-lg-12 one-ten">
+                            
+                            
+                            
+                            
+                            <div class="col-lg-12 totals-banner">
+                                <p><span class='p-break'>{{one.One+two.Two+three.Three+four.Four+five.Five+six.Six}} Detractors</span> <span class='p-break'>{{seven.Seven+eight.Eight}} Neutrals</span> {{nine.Nine+ten.Ten}} Promoters</p>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <h4>{{one.One+two.Two+three.Three+four.Four+five.Five+six.Six+seven.Seven+eight.Eight+nine.Nine.ten.Ten}} Responses </h4>
+                            </div>
+                            
+                            
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">1</div>
+                                <input ng-model="one.One" type="number" ng-keyup="AddNumbers()" string-to-number title='' class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">2</div>
+                                <input ng-model="two.Two" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">3</div>
+                                <input ng-model="three.Three" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">4</div>
+                                <input ng-model="four.Four" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">5</div>
+                                <input ng-model="five.Five" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">6</div>
+                                <input ng-model="six.Six" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon orange">7</div>
+                                <input ng-model="seven.Seven" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon orange">8</div>
+                                <input ng-model="eight.Eight" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon green">9</div>
+                                <input ng-model="nine.Nine" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon green">10</div>
+                                <input ng-model="ten.Ten" ng-keyup="AddNumbers()" type="number" class='input-rounded' min="0">
+                            </div>
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-1 types">
+                            <h4>Types</h4>
+                            
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="input-group-addon red"><p>Detractors</p></div>
+                                        <input ng-model='detractorsPercentageSum.Detractors' type="number" readonly="readonly">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-addon orange"><p>Neutrals</p></div>
+                                    <input ng-model='neutralsPercentageSum.Neutrals' type="number" readonly="readonly">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            </div>
+
+                            <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-addon green"><p>Promoters</p></div>
+                                    <input ng-model='promotersPercentageSum.Promoters' type="number" readonly="readonly">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-md-offset-4 nps-wrap">
+                            <h4>Your NPS<span class='nps-symbol'>&reg;</span> Result</h4>
+                            <div class="input-group">
+                                <input ng-model='npsScore.NPS' class='nps-input' type="number" readonly="readonly">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary btn-large center hide" ng-class="{'show' : one+two+three+four+five+six+seven+eight+nine+ten > 0}" type="reset" ng-click="reset()"><i class="fa fa-refresh"></i>Clear</button>
+                        </div>
+                    
+                    
+                
+                    
+
+                    
+    
+                            </div>    
+                        </div>
+                      </div>
+                    </div>
+          
+      
+                    <div class="container">
+                        
+                    </div>
+          
+          
+          
+<!--
+          <div ng-app="testApp">
+              
+                  
+                <div ng-controller="testController">
+                <div class="row">
+                    
+                Email: <input type="text" ng-model="email">
+  Password: <input type="text" ng-model="password">
+
+  <br><br>
+
+  <button ng-click="createUser()">Create User</button>
+
+  <br><br>
+
+  <button ng-click="removeUser()">Remove User</button>
+
+  <p ng-if="message">Message: <strong>{{ message }}</strong></p>
+  <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+                    
+                    
+                    
+                        <div class="col-lg-12">
+                            <h2>How likely is it you would recommend our company to a friend or colleague?</h2>
+                        </div>
+                    
+                        <div class="col-lg-12 one-ten">
+                            
+                            <input type="text" ng-model="data.nps"/>
+                             <h1>You said: {{ data.nps }}</h1>
+                            
+    
+                    </div>    
+                    
+                    <ul>
+                        <li ng-repeat="message in messages">
+                            <input ng-model="message.text" ng-change="messages.$save(message)" />
+                            <button ng-click="messages.$remove(message)">Delete Message</button>
+                        </li>
+                    </ul>
+                    
+                        <form ng-submit="addMessage()">
+                            <input ng-model="newMessageText" />
+                            <button type="submit">Add Message</button>
+                        </form>
+                    
+                </div>
+              </div>
+          
+         </div>
+-->
+          
+    
+    
+    <footer>
+        <div class="container">
+            <div class="col-lg-12">
+                <p>What's my NPS? is provided by BusinessHub.com</p>
+                <p>Net Promoter, Net Promoter Score, and NPS are trademarks of Satmetrix Systems, Inc., Bain &amp; Company, Inc., and Fred Reichheld.</p>
+            </div>
+        </div>
+    </footer>
+            
+     
+  </body>
+</html>
