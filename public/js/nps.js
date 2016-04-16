@@ -7,16 +7,16 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
      // Working out the totals
     $scope.AddNumbers = function () {
-        var one = Number($scope.one.One || 0);
-        var two = Number($scope.two.Two || 0);
-        var three = Number($scope.three.Three || 0);
-        var four = Number($scope.four.Four || 0);
-        var five = Number($scope.five.Five || 0);
-        var six = Number($scope.six.Six || 0);
-        var seven = Number($scope.seven.Seven || 0);
-        var eight = Number($scope.eight.Eight || 0);
-        var nine = Number($scope.nine.Nine || 0);
-        var ten = Number($scope.ten.Ten || 0);
+        var one = ($scope.one.One || 0);
+        var two = ($scope.two.Two || 0);
+        var three = ($scope.three.Three || 0);
+        var four = ($scope.four.Four || 0);
+        var five = ($scope.five.Five || 0);
+        var six = ($scope.six.Six || 0);
+        var seven = ($scope.seven.Seven || 0);
+        var eight = ($scope.eight.Eight || 0);
+        var nine = ($scope.nine.Nine || 0);
+        var ten = ($scope.ten.Ten || 0);
 
         // Setting the values to the scopes
         $scope.totalRespondents = one + two + three + four + five + six + seven + eight + nine + ten;
@@ -45,6 +45,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     // creating new firebase ref for responses
     
     var ref = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Response_Scores");
+    
     
     var One = $firebaseObject(ref);
     var Two = $firebaseObject(ref);
@@ -182,8 +183,8 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
 
 
-    $("#fblogin").on("click", function() {
-var ref = new Firebase("https://shining-torch-3939.firebaseio.com/users");
+$("#fblogin").on("click", function() {
+var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
 ref.authWithOAuthPopup("facebook", function(error, authData) {
   if (error) {
     console.log("Login Failed!", error);
@@ -201,15 +202,18 @@ function authDataCallback(authData) {
   }
 }
 // Register the callback to be fired every time auth state changes
-var ref = new Firebase("https://shining-torch-3939.firebaseio.com/users");
+var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
 ref.onAuth(authDataCallback);
         
     });
+  
+    
+    
  });  
 
 app.factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
-    var ref = new Firebase("https://shining-torch-3939.firebaseio.com/users");
+    var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
     return $firebaseAuth(ref);
   }
 ]);
@@ -223,7 +227,12 @@ app.controller("facebookLogin", ["$scope", "Auth",
       $scope.authData = authData;
     });
   }
+                                 
+                                 
+                                 
 ]);
+
+
 
 
 
