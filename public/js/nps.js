@@ -7,6 +7,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
      // Working out the totals
     $scope.AddNumbers = function () {
+        var zero = ($scope.zero.Zero || 0);
         var one = ($scope.one.One || 0);
         var two = ($scope.two.Two || 0);
         var three = ($scope.three.Three || 0);
@@ -19,8 +20,8 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
         var ten = ($scope.ten.Ten || 0);
 
         // Setting the values to the scopes
-        $scope.totalRespondents = one + two + three + four + five + six + seven + eight + nine + ten;
-        $scope.totalDetractors = one + two + three + four + five + six;
+        $scope.totalRespondents = zero + one + two + three + four + five + six + seven + eight + nine + ten;
+        $scope.totalDetractors = zero + one + two + three + four + five + six;
         $scope.totalNeutrals = seven + eight;
         $scope.totalPromoters = nine + ten;
         
@@ -46,7 +47,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     var ref = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Response_Scores");
     
-    
+    var Zero = $firebaseObject(ref);
     var One = $firebaseObject(ref);
     var Two = $firebaseObject(ref);
     var Three = $firebaseObject(ref);
@@ -59,7 +60,8 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     var Ten = $firebaseObject(ref);
         
     // setting the response objects to the scopes
-
+    
+    Zero.$bindTo($scope, "zero");
     One.$bindTo($scope, "one");
     Two.$bindTo($scope, "two");
     Three.$bindTo($scope, "three");
@@ -107,6 +109,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     // Reset Values Button
 
     $scope.reset = function() {
+        $scope.zero = null;
         $scope.one = null;
         $scope.two = null;
         $scope.three = null;

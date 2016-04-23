@@ -53,6 +53,7 @@ input {
 
 .page-wrap {
     min-height: 100%;
+    height: 100%;
 }
 
 footer p {
@@ -133,7 +134,7 @@ h2 {
 .one-ten .input-group {
     float: left;
     margin: .4em;
-    width: 9%;
+    width: 8%;
 }
 
 .one-ten .input-group-addon {
@@ -339,4 +340,6 @@ a:hover, a:focus, a:visited {
     background: #2D205F;
 }
 
-
+footer {
+    margin-top: 4em;
+}

@@ -76,13 +76,17 @@
                         <div class="col-lg-12 one-ten">
                             
                             <div class="col-lg-12 totals-banner">
-                                <p><span class='p-break'>{{one.One+two.Two+three.Three+four.Four+five.Five+six.Six}} Detractors</span> <span class='p-break'>{{seven.Seven+eight.Eight}} Neutrals</span> {{nine.Nine+ten.Ten}} Promoters</p>
+                                <p><span class='p-break'>{{zero.Zero+one.One+two.Two+three.Three+four.Four+five.Five+six.Six}} Detractors</span> <span class='p-break'>{{seven.Seven+eight.Eight}} Neutrals</span> {{nine.Nine+ten.Ten}} Promoters</p>
                             </div>
                             
                             <div class="col-lg-12">
-                                <h4>{{one.One+two.Two+three.Three+four.Four+five.Five+six.Six+seven.Seven+eight.Eight+nine.Nine+ten.Ten}} Responses </h4>
+                                <h4>{{zero.Zero+one.One+two.Two+three.Three+four.Four+five.Five+six.Six+seven.Seven+eight.Eight+nine.Nine+ten.Ten}} Responses </h4>
                             </div>
                             
+                            <div class="col-sm-1 input-group">
+                                <div class="input-group-addon red">0</div>
+                                <input ng-model="zero.Zero" type="number" ng-keyup="AddNumbers()" string-to-number title='' class='input-rounded' min="0">
+                            </div>
                             
                             <div class="col-sm-1 input-group">
                                 <div class="input-group-addon red">1</div>
