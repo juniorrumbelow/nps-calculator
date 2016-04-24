@@ -41,11 +41,13 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
         
         // Setting the values to the scope
         $scope.npsScore.NPS = parseFloat(npsScoreTotal.toFixed(0));
+        
+        
     };
     
     // creating new firebase ref for responses
     
-    var ref = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Response_Scores");
+    var ref = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "Response_Scores");
     
     var Zero = $firebaseObject(ref);
     var One = $firebaseObject(ref);
@@ -76,9 +78,9 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     // creating new firebase refs for percentages
     
-    var refn = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Percentages/Neutrals");
-    var refd = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Percentages/Detractors");
-    var refp = new Firebase("https://shining-torch-3939.firebaseio.com/nps/Percentages/Promoters");
+    var refn = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Neutrals");
+    var refd = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Detractors");
+    var refp = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Promoters");
     
     var N = $firebaseObject(refn);
     var D = $firebaseObject(refd);
@@ -94,7 +96,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     // creating new firebase ref for nps score
     
-    var refscore = new Firebase("https://shining-torch-3939.firebaseio.com/nps/NPS_Score");
+    var refscore = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "NPS_Score");
     
     var NPS = $firebaseObject(refscore);
     
@@ -102,88 +104,6 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     NPS.$bindTo($scope, "npsScore");
         
-        
-   
-    
-    
-    // Reset Values Button
-
-    $scope.reset = function() {
-        $scope.zero = null;
-        $scope.one = null;
-        $scope.two = null;
-        $scope.three = null;
-        $scope.four = null;
-        $scope.five = null;
-        $scope.six = null;
-        $scope.seven = null;
-        $scope.eight = null;
-        $scope.nine = null;
-        $scope.ten = null;
-        $scope.totalRespondents = null;
-        $scope.totalDetractors = null;
-        $scope.totalNeutrals = null;
-        $scope.totalPromoters = null;
-        $scope.detractorsPercentageSum = null;
-        $scope.neutralsPercentageSum = null;
-        $scope.promotersPercentageSum = null;
-        $scope.npsScore = null;
-    };
-
-    if ($scope.one !== undefined) {  
-        $scope.one = '';
-    }
-        else {
-            $scope.one = null;
-        }
-
-    if ($scope.seven !== undefined) {  
-        $scope.seven = '';
-    }
-        else {
-            $scope.seven = null;
-        }
-
-    if ($scope.ten !== undefined) {  
-        $scope.ten = '';
-    }
-        else {
-            $scope.ten = null;
-        }
-    
-//    
-//    
-//    $("#fblogin").on("click", function() {
-//    var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
-//        ref.authWithOAuthPopup("facebook", function(error, authData) {
-//          if (error) {
-//            console.log("Login Failed!", error);
-//          } else {
-//            remember: true;
-//            console.log("Authenticated successfully with payload:", authData);
-//
-//            console.log(authData.facebook.displayName);
-//            console.log(authData.facebook.email);
-//            console.log(authData.facebook.picture);
-//              
-//            var userName = authData.facebook.displayName;
-//            $scope.userNameFB = userName;
-//           }
-//       },
-//           {
-//            scope: "email,user_likes"
-//            
-//        } 
-//                               
-//        );
-//         
-//        $scope.userEmailFB = authData.facebook.email;
-//        
-//    });
-    
-    
-
-    
 
 
 $("#fblogin").on("click", function() {
@@ -194,6 +114,7 @@ ref.authWithOAuthPopup("facebook", function(error, authData) {
   } else {
     console.log("Authenticated successfully with payload:", authData);
   }
+    
 });
         
 // Create a callback which logs the current auth state
@@ -203,16 +124,42 @@ function authDataCallback(authData) {
   } else {
     console.log("User is logged out");
   }
+    
+  
+    var auth = $firebaseAuth(new Firebase("https://shining-torch-3939.firebaseio.com"));
+
+    auth.$onAuth(function (authData) {
+        if (authData) {
+            var ref = new Firebase("https://shining-torch-3939.firebaseio.com" + "/users/" + authData.uid);
+            var user = $firebaseObject(ref);
+            user.name = authData.facebook.displayName;
+            user.email = authData.facebook.email;
+            user.id = authData.facebook.id;
+            user.$save().then(function () {
+                console.log(user);
+            });
+        }
+    });
+    return auth;
+
 }
+    
 // Register the callback to be fired every time auth state changes
 var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
 ref.onAuth(authDataCallback);
         
-    });
-  
+});
     
     
- });  
+    
+
+
+    
+    
+    
+});
+
+
 
 app.factory("Auth", ["$firebaseAuth",
   function($firebaseAuth) {
@@ -229,16 +176,35 @@ app.controller("facebookLogin", ["$scope", "Auth",
     $scope.auth.$onAuth(function(authData) {
       $scope.authData = authData;
     });
-  }
-                                 
-                                 
-                                 
+}                                                                                       
 ]);
 
 
 
 
+    // Reset Values Button
 
+//    $scope.reset = function() {
+//        $scope.zero.Zero = null;
+//        $scope.one.One = null;
+//        $scope.two.Two = null;
+//        $scope.three.Three = null;
+//        $scope.four.Four = null;
+//        $scope.five.Five = null;
+//        $scope.six.Six = null;
+//        $scope.seven.Seven = null;
+//        $scope.eight.Eight = null;
+//        $scope.nine.Nine = null;
+//        $scope.ten.Ten = null;
+//        $scope.totalRespondents = null;
+//        $scope.totalDetractors = null;
+//        $scope.totalNeutrals = null;
+//        $scope.totalPromoters = null;
+//        $scope.detractorsPercentageSum = null;
+//        $scope.neutralsPercentageSum = null;
+//        $scope.promotersPercentageSum = null;
+//        $scope.npsScore = null;
+//    };
 
     
     
