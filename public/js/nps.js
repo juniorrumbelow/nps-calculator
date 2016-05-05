@@ -1,9 +1,9 @@
 var app = angular.module('npsApp', ["firebase"]);
 
-
 app.controller("npsController", function ($scope, $firebaseObject, $firebaseArray, $firebaseAuth) {
     
-    
+    var firebaseURL = 'https://shining-torch-3939.firebaseio.com';
+
     
      // Working out the totals
     $scope.AddNumbers = function () {
@@ -45,7 +45,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     // creating new firebase ref for responses
     
-    var ref = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "Response_Scores");
+    var ref = new Firebase(firebaseURL + "/nps/" + "Response_Scores");
     
     var Zero = $firebaseObject(ref);
     var One = $firebaseObject(ref);
@@ -76,9 +76,9 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     // creating new firebase refs for percentages
     
-    var refn = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Neutrals");
-    var refd = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Detractors");
-    var refp = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "/Percentages/" + "Promoters");
+    var refn = new Firebase(firebaseURL + "/nps/" + "/Percentages/" + "Neutrals");
+    var refd = new Firebase(firebaseURL + "/nps/" + "/Percentages/" + "Detractors");
+    var refp = new Firebase(firebaseURL + "/nps/" + "/Percentages/" + "Promoters");
     
     var N = $firebaseObject(refn);
     var D = $firebaseObject(refd);
@@ -94,7 +94,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
     
     // creating new firebase ref for nps score
     
-    var refscore = new Firebase("https://shining-torch-3939.firebaseio.com" + "/nps/" + "NPS_Score");
+    var refscore = new Firebase(firebaseURL + "/nps/" + "NPS_Score");
     
     var NPS = $firebaseObject(refscore);
     
@@ -105,7 +105,7 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
 
 
 $("#fblogin").on("click", function() {
-var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
+var ref = new Firebase(firebaseURL);
 ref.authWithOAuthPopup("facebook", function(error, authData) {
   if (error) {
     console.log("Login Failed!", error);
@@ -124,11 +124,11 @@ function authDataCallback(authData) {
   }
     
   
-    var auth = $firebaseAuth(new Firebase("https://shining-torch-3939.firebaseio.com"));
+    var auth = $firebaseAuth(new Firebase(firebaseURL));
 
     auth.$onAuth(function (authData) {
         if (authData) {
-            var ref = new Firebase("https://shining-torch-3939.firebaseio.com" + "/users/" + authData.uid);
+            var ref = new Firebase(firebaseURL + "/users/" + authData.uid);
             var user = $firebaseObject(ref);
             user.name = authData.facebook.displayName;
             user.email = authData.facebook.email;
@@ -149,7 +149,7 @@ function authDataCallback(authData) {
     
  
 // Register the callback to be fired every time auth state changes
-var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
+var ref = new Firebase(firebaseURL);
 ref.onAuth(authDataCallback);
         
 });
