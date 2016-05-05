@@ -41,8 +41,6 @@ app.controller("npsController", function ($scope, $firebaseObject, $firebaseArra
         
         // Setting the values to the scope
         $scope.npsScore.NPS = parseFloat(npsScoreTotal.toFixed(0));
-        
-        
     };
     
     // creating new firebase ref for responses
@@ -138,24 +136,23 @@ function authDataCallback(authData) {
             user.$save().then(function () {
                 console.log(user);
             });
+            
+            
         }
+        
+        
     });
     return auth;
+    
 
 }
     
+ 
 // Register the callback to be fired every time auth state changes
 var ref = new Firebase("https://shining-torch-3939.firebaseio.com");
 ref.onAuth(authDataCallback);
         
 });
-    
-    
-    
-
-
-    
-    
     
 });
 

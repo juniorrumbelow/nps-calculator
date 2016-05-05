@@ -170,7 +170,7 @@
                         <div class="col-md-4 col-md-offset-4 nps-wrap">
                             <h4>Your NPS<span class='nps-symbol'>&reg;</span> Result</h4>
                             <div class="input-group">
-                                <input ng-model='npsScore.NPS' class='nps-input' type="number" readonly="readonly">
+                                <input ng-model='npsScore.NPS' class='nps-input' ng-class="npsScore.NPS > 70 ? 'green-text' : 'red-text'" type="number" readonly="readonly">
                             </div>
                         </div>
 

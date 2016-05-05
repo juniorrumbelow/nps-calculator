@@ -343,3 +343,11 @@ a:hover, a:focus, a:visited {
 footer {
     margin-top: 4em;
 }
+
+.green-text {
+    color: #00D000;
+}
+
+.red-text {
+    color: #E60000;
+}
